@@ -3,8 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>表单信息提取</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="row" style="margin-top: 30px">
+                <div class="col-md-12">
+                    <textarea rows="10" class="form-control" placeholder="复制话题到此处" id="action-info"></textarea>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-primary btn-sm" id="btn-extract">&nbsp;&nbsp;提取&nbsp;&nbsp;</button>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px">
+                <div class="col-md-12">
+                    <textarea rows="20" class="form-control" placeholder="提取结果" id="extract-info"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 
+</div>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/infoExtract.js"></script>
 </body>
 </html>
