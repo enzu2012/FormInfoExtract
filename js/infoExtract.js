@@ -40,20 +40,38 @@ function extract(){
                     }
                     //截取关键词
                     var matchKeyWords=properties[j].match(/(\=\+){1}[^\n]*\n/gi);
-                    matchKeyWords[0]=matchKeyWords[0].substr(0,matchKeyWords[0].length-1);
-                    var keywords;
-                    var keyword;
-                    //alert(matchKeyWords[0].indexOf("~"));
-                    if(matchKeyWords[0].indexOf("~")!==-1){
-                        keywords=matchKeyWords[0].split("~");
-                        for(var k=0;k<keywords.length;k++){
-                            keywords[k]=keywords[k].split("=+")[1];
-                            resString+=name+"，"+propertyName+"，"+keywords[k]+"\n";
+                    if(matchKeyWords){
+                        matchKeyWords[0]=matchKeyWords[0].substr(0,matchKeyWords[0].length-1);
+                        var keywords;
+                        var keyword;
+                        //alert(matchKeyWords[0].indexOf("~"));
+                        if(matchKeyWords[0].indexOf("~")!==-1){
+                            keywords=matchKeyWords[0].split("~");
+                            for(var k=0;k<keywords.length;k++){
+                                keywords[k]=keywords[k].split("=+")[1];
+                                if(keywords[k]!="none"){
+                                    resString+=name+"，"+propertyName+"，"+keywords[k]+"\n";
+                                }
+                            }
+                            if((properties[j].indexOf("::")||actionInfo[i].indexOf("interrupt"))!==-1){
+                                if(properties[j].indexOf("condition")!==-1){
+                                    resString+=name+"，"+propertyName+"，unknown\n";
+                                }
+                            }
+                        }else{
+                            keyword=matchKeyWords[0];
+                            //alert(keyword);
+                            //alert(keyword.indexOf("none"));
+                            if(keyword.indexOf("none")==-1){
+                                resString+=name+"，"+propertyName+"，"+keyword.substr(2)+"\n";
+                            }else{
+                                resString+=name+"，"+propertyName+"，unknown\n";
+                            }
                         }
                     }else{
-                        keyword=matchKeyWords[0];
-                        resString+=name+"，"+propertyName+"，"+keyword.substr(2)+"\n";
+                        resString+=name+"，"+propertyName+"，空\n";
                     }
+
                 }
             }
         }
