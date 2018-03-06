@@ -53,7 +53,7 @@ function extract(){
                                     resString+=name+"，"+propertyName+"，"+keywords[k]+"\n";
                                 }
                             }
-                            if((properties[j].indexOf("::")||actionInfo[i].indexOf("interrupt"))!==-1){
+                            if((properties[j].indexOf("::")!==-1||actionInfo[i].indexOf("interrupt"))!==-1){
                                 if(properties[j].indexOf("condition")!==-1){
                                     resString+=name+"，"+propertyName+"，unknown\n";
                                 }
@@ -62,8 +62,13 @@ function extract(){
                             keyword=matchKeyWords[0];
                             //alert(keyword);
                             //alert(keyword.indexOf("none"));
-                            if(keyword.indexOf("none")==-1){
+                            if(keyword.indexOf("none")===-1){
                                 resString+=name+"，"+propertyName+"，"+keyword.substr(2)+"\n";
+                                if((properties[j].indexOf("::")!==-1||actionInfo[i].indexOf("interrupt"))!==-1){
+                                    if(properties[j].indexOf("condition")!==-1){
+                                        resString+=name+"，"+propertyName+"，unknown\n";
+                                    }
+                                }
                             }else{
                                 resString+=name+"，"+propertyName+"，unknown\n";
                             }
