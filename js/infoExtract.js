@@ -44,13 +44,34 @@ function extract(){
                         matchKeyWords[0]=matchKeyWords[0].substr(0,matchKeyWords[0].length-1);
                         var keywords;
                         var keyword;
+                        var words;
                         //alert(matchKeyWords[0].indexOf("~"));
                         if(matchKeyWords[0].indexOf("~")!==-1){
                             keywords=matchKeyWords[0].split("~");
                             for(var k=0;k<keywords.length;k++){
                                 keywords[k]=keywords[k].split("=+")[1];
-                                if(keywords[k]!="none"){
-                                    resString+=name+"，"+propertyName+"，"+keywords[k]+"\n";
+                                if(keywords[k]!="none") {
+                                    var keywordSplit="";
+                                    words = keywords[k].split("+");
+                                    for (var l = 0; l < words.length; l++) {
+                                        if (keywordSplit.length<200){
+                                            if(keywordSplit.length>1){
+                                                keywordSplit +="+"+words[l];
+                                            }else{
+                                                keywordSplit+=words[l];
+                                            }
+                                        }else{
+                                            //alert(keywordSplit);
+                                            resString+=name+"，"+propertyName+"，"+keywordSplit+"\n";
+                                            //alert("finish one");
+                                            keywordSplit="";
+                                            keywordSplit+=words[l];
+                                        }
+                                        if(l===words.length-1){
+                                            resString+=name+"，"+propertyName+"，"+keywordSplit+"\n";
+                                            //alert("end");
+                                        }
+                                    }
                                 }
                             }
                             if((properties[j].indexOf("::")!==-1||actionInfo[i].indexOf("interrupt"))!==-1){
@@ -63,7 +84,28 @@ function extract(){
                             //alert(keyword);
                             //alert(keyword.indexOf("none"));
                             if(keyword.indexOf("none")===-1){
-                                resString+=name+"，"+propertyName+"，"+keyword.substr(2)+"\n";
+                                var keywordSplit="";
+                                keyword=keyword.substr(2);
+                                words = keyword.split("+");
+                                for (var l = 0; l < words.length; l++) {
+                                    if (keywordSplit.length<200){
+                                        if(keywordSplit.length>1){
+                                            keywordSplit +="+"+words[l];
+                                        }else{
+                                            keywordSplit+=words[l];
+                                        }
+                                    }else{
+                                        //alert(keywordSplit);
+                                        resString+=name+"，"+propertyName+"，"+keywordSplit+"\n";
+                                        //alert("finish one");
+                                        keywordSplit="";
+                                        keywordSplit+=words[l];
+                                    }
+                                    if(l===words.length-1){
+                                        resString+=name+"，"+propertyName+"，"+keywordSplit+"\n";
+                                        //alert("end");
+                                    }
+                                }
                                 if((properties[j].indexOf("::")!==-1||actionInfo[i].indexOf("interrupt"))!==-1){
                                     if(properties[j].indexOf("condition")!==-1){
                                         resString+=name+"，"+propertyName+"，unknown\n";
