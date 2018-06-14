@@ -55,7 +55,7 @@ function extract(){
                                     words = keywords[k].split("+");
                                     for (var l = 0; l < words.length; l++) {
                                         if (keywordSplit.length<200){
-                                            if(keywordSplit.length>1){
+                                            if(keywordSplit.length>0){
                                                 keywordSplit +="+"+words[l];
                                             }else{
                                                 keywordSplit+=words[l];
@@ -89,7 +89,7 @@ function extract(){
                                 words = keyword.split("+");
                                 for (var l = 0; l < words.length; l++) {
                                     if (keywordSplit.length<200){
-                                        if(keywordSplit.length>1){
+                                        if(keywordSplit.length>0){
                                             keywordSplit +="+"+words[l];
                                         }else{
                                             keywordSplit+=words[l];
