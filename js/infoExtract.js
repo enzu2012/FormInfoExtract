@@ -31,8 +31,11 @@ function extract(){
                     var start=properties[j].indexOf("=")+1;
                     var end1=properties[j].indexOf(':');
                     var end2=properties[j].indexOf('|');
-                    if(end1!=-1){
+                    //alert("start:"+start+"end1:"+end1+"end2:"+end2);
+                    if(end1!=-1&&end1<101){
                         propertyName=properties[j].substr(start,end1-10);
+                    }else if(end1>100){
+                        alert("请检查变量:"+properties[j].substr(start,end2-10)+"是否存在非法《:》");
                     }else if(end2!=-1){
                         propertyName=properties[j].substr(start,end2-10);
                     }else{
@@ -41,6 +44,7 @@ function extract(){
                     //截取关键词
                     var matchKeyWords=properties[j].match(/(\=\+){1}[^\n]*\n/gi);
                     if(matchKeyWords){
+                        //alert(matchKeyWords[0]);
                         matchKeyWords[0]=matchKeyWords[0].substr(0,matchKeyWords[0].length-1);
                         var keywords;
                         var keyword;
