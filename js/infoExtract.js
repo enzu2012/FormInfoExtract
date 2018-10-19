@@ -21,7 +21,6 @@ function extract(){
                 name=name.substr(0,name.length-1);
                 //话题名
                 //alert(name);
-                //action.name=name;
                 properties=actionsInfo[i].match(/(condition=|reference=){1}[^\n]*\n/gi);
                 //变量数量
                 //alert(properties.length);
@@ -39,7 +38,7 @@ function extract(){
                     }else if(end2!=-1){
                         propertyName=properties[j].substr(start,end2-10);
                     }else{
-                        alert("未查找到"+action.name+"的变量");
+                        alert("未查找到"+name+"的变量");
                     }
                     //截取关键词
                     var matchKeyWords=properties[j].match(/(\=\+){1}[^\n]*\n/gi);
@@ -53,8 +52,13 @@ function extract(){
                         if(matchKeyWords[0].indexOf("~")!==-1){
                             keywords=matchKeyWords[0].split("~");
                             for(var k=0;k<keywords.length;k++){
-                                keywords[k]=keywords[k].split("=+")[1];
-                                if(keywords[k]!="none") {
+                                //alert(keywords[k]);
+                                if(keywords[k].indexOf("=+")==-1){
+                                    alert("请检查话题："+name+"的关键词部分，没有=+")
+                                }else{
+                                    keywords[k]=keywords[k].split("=+")[1];
+                                }
+                                if(keywords[k]!="none"&&(!keywords[k])) {
                                     var keywordSplit="";
                                     words = keywords[k].split("+");
                                     for (var l = 0; l < words.length; l++) {
