@@ -54,11 +54,12 @@ function extract(){
                             for(var k=0;k<keywords.length;k++){
                                 //alert(keywords[k]);
                                 if(keywords[k].indexOf("=+")==-1){
-                                    alert("请检查话题："+name+"的关键词部分，没有=+")
+                                    alert("请检查变量："+propertyName+"的关键词部分"+keywords[k]+"，没有=+");
+                                    return ;
                                 }else{
                                     keywords[k]=keywords[k].split("=+")[1];
                                 }
-                                if(keywords[k]!="none"&&(!keywords[k])) {
+                                if(keywords[k]!="none") {
                                     var keywordSplit="";
                                     words = keywords[k].split("+");
                                     for (var l = 0; l < words.length; l++) {
@@ -82,7 +83,8 @@ function extract(){
                                     }
                                 }
                             }
-                            if((properties[j].indexOf("::")!==-1||actionInfo[i].indexOf("interrupt"))!==-1){
+                            //alert(properties[j]);
+                            if((properties[j].indexOf("::")!==-1||actionInfo[i].indexOf("interrupt")!==-1)){
                                 if(properties[j].indexOf("condition")!==-1){
                                     resString+=name+"，"+propertyName+"，unknown\n";
                                 }
